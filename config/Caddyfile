@@ -1,14 +1,18 @@
-https://avatar.test {
+localhost:80 localhost:443 {
+  redir {
+    if {scheme} is http
+    / https://{host}{uri}
+  }
+
   gzip
   #tls /ssl/example.crt /ssl/example.key
   tls self_signed
   
   proxy / http://avatar-cache:9501 {
-    insecure_skip_verify
     transparent
   }
 
-  log /etc/caddy/logs {
+  log /etc/caddy/logs/caddy.log {
 	rotate_size     32
 	rotate_age      30
 	rotate_keep     7

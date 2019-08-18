@@ -1,0 +1,17 @@
+https://avatar.test {
+  gzip
+  #tls /ssl/example.crt /ssl/example.key
+  tls self_signed
+  
+  proxy / http://avatar-cache:9501 {
+    insecure_skip_verify
+    transparent
+  }
+
+  log /etc/caddy/logs {
+	rotate_size     32
+	rotate_age      30
+	rotate_keep     7
+	rotate_compress
+  }
+}
